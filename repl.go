@@ -7,7 +7,7 @@ import (
 )
 
 func prompt() {
-	fmt.Print("diyb (0.0.1) > ")
+	fmt.Print("dbiy (0.0.1) > ")
 }
 
 func main() {
