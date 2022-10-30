@@ -7,8 +7,11 @@ import (
 	"strings"
 )
 
+const DBMSName = "jcdb"
+const Version = "0.0.1"
+
 func prompt() {
-	fmt.Print("dbiy (0.0.1) > ")
+	fmt.Printf("%v (%v) > ", DBMSName, Version)
 }
 
 func get(r *bufio.Reader) string {
@@ -16,8 +19,9 @@ func get(r *bufio.Reader) string {
 	return strings.TrimSpace(t)
 }
 
-func shouldContinue(text string) bool {
+func isActive(text string) bool {
 	if strings.EqualFold("exit", text) {
+		fmt.Println("Goodbye!")
 		return false
 	}
 	return true
@@ -27,8 +31,10 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	prompt()
 	text := get(reader)
-	for ; shouldContinue(text); text = get(reader) {
-		fmt.Println(text)
+	for ; isActive(text); text = get(reader) {
+		if text != "" {
+			fmt.Println(text)
+		}
 		prompt()
 	}
 }
