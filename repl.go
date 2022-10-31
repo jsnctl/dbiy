@@ -11,7 +11,7 @@ const DBMSName = "jcdb"
 const Version = "0.0.1"
 
 func prompt() {
-	fmt.Printf("%v (%v) > ", DBMSName, Version)
+	fmt.Printf("%v > ", DBMSName)
 }
 
 func get(r *bufio.Reader) string {
@@ -27,13 +27,28 @@ func isActive(text string) bool {
 	return true
 }
 
+func getVersion() {
+	fmt.Printf("jcdb version %v \n", Version)
+}
+
+func getAbout() {
+	fmt.Printf("jcdb is a homemade DBMS \n")
+}
+
 func main() {
+	commands := map[string]interface{}{
+		"version": getVersion,
+		"about":   getAbout,
+	}
 	reader := bufio.NewReader(os.Stdin)
 	prompt()
 	text := get(reader)
 	for ; isActive(text); text = get(reader) {
-		if text != "" {
-			fmt.Println(text)
+		if text == "" {
+		} else if command, exists := commands[text]; exists {
+			command.(func())()
+		} else {
+			fmt.Printf("Command %v not found \n", text)
 		}
 		prompt()
 	}
