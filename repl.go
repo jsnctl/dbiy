@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-const DBMSName = "jcdb"
+const DBMSName = "dbiy"
 const Version = "0.0.1"
 
 func prompt() {
-	fmt.Printf("%v > ", DBMSName)
+	fmt.Printf("%v> ", DBMSName)
 }
 
 func get(r *bufio.Reader) string {
@@ -28,11 +28,11 @@ func isActive(text string) bool {
 }
 
 func getVersion() {
-	fmt.Printf("jcdb version %v \n", Version)
+	fmt.Printf("%v version %v \n", DBMSName, Version)
 }
 
 func getAbout() {
-	fmt.Printf("jcdb is a homemade DBMS \n")
+	fmt.Printf("%v is a homemade DBMS \n", DBMSName)
 }
 
 func main() {
