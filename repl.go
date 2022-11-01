@@ -35,21 +35,43 @@ func getAbout() {
 	fmt.Printf("%v is a homemade DBMS \n", DBMSName)
 }
 
-func main() {
+type Record struct {
+	ID string
+	A  float64
+	B  int
+}
+
+func doInsert(object string) {
+	fmt.Printf("Insert (%v)\n", object)
+}
+
+func lookupCommand(text string) {
 	commands := map[string]interface{}{
 		"version": getVersion,
 		"about":   getAbout,
+		"insert":  doInsert,
 	}
+	command := strings.Fields(text)[0]
+	if cmd, exists := commands[command]; exists {
+		if command == "insert" {
+			object := strings.TrimLeft(text, "insert ")
+			doInsert(object)
+		} else {
+			cmd.(func())()
+		}
+	} else if text == "" {
+		// nothing
+	} else {
+		fmt.Printf("Command %v not found \n", text)
+	}
+}
+
+func main() {
 	reader := bufio.NewReader(os.Stdin)
 	prompt()
 	text := get(reader)
 	for ; isActive(text); text = get(reader) {
-		if text == "" {
-		} else if command, exists := commands[text]; exists {
-			command.(func())()
-		} else {
-			fmt.Printf("Command %v not found \n", text)
-		}
+		lookupCommand(text)
 		prompt()
 	}
 }
