@@ -35,12 +35,6 @@ func getAbout() {
 	fmt.Printf("%v is a homemade DBMS \n", DBMSName)
 }
 
-type Record struct {
-	ID string
-	A  float64
-	B  int
-}
-
 func doInsert(object string) {
 	fmt.Printf("Insert (%v)\n", object)
 }
