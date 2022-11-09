@@ -35,4 +35,11 @@ type Table struct {
 	rows    [][]MemoryObject
 }
 
+func CreateTable(name string, columns []Column) *Table {
+	t := Table{}
+	t.name = name
+	t.columns = columns
+	return &t
+}
+
 type MemoryObject []byte
