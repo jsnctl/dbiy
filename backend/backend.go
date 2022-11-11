@@ -1,4 +1,4 @@
-package main
+package backend
 
 type Record struct {
 	ID string
@@ -25,20 +25,20 @@ const (
 )
 
 type Column struct {
-	name  string
-	cType ColumnType
+	Name  string
+	CType ColumnType
 }
 
 type Table struct {
-	name    string
-	columns []Column
-	rows    [][]MemoryObject
+	Name    string
+	Columns []Column
+	Rows    [][]MemoryObject
 }
 
 func CreateTable(name string, columns []Column) *Table {
 	t := Table{}
-	t.name = name
-	t.columns = columns
+	t.Name = name
+	t.Columns = columns
 	return &t
 }
 
